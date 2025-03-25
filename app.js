@@ -28,6 +28,11 @@ app.use(express.json());
 //middleware per gestione delle immagini
 app.use(imagePathMiddleware);
 
+//rotta di test
+app.get( '/', (req, res) => {
+    res.send( 'Server Book tutto a posto!' )
+} )
+
 //Router 
 app.use( '/movies' , movieRouter ) 
 
