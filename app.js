@@ -4,7 +4,7 @@ import express from 'express';
 //impostiamo express e la porta del server
 const app = express();
 import cors from 'cors';
-const port = 3000;
+const port = process.env.SERVER_PORT || 3000;
 
 
 import movieRouter from './routes/movieRouter.js';
@@ -20,7 +20,7 @@ app.use(
 
 
 //middleware per gestire asset statici
-app.use(express.static('public'));
+app.use(express.static('public/img/movies'));
 
 //middleware per gestire le informazioni del body
 app.use(express.json());
