@@ -104,5 +104,30 @@ function storeReview(req, res) {
 }
 
 
+function store(req,res){
+  //recuparare le info da req.body
+  const { title, director, abstract} = req.body
 
-export { index, show, destroy , storeReview};
+  const imageName = `${req.file.filename}`
+
+  const sql = "INSERT INTO movies (title, director, image, abstract) VALUES (?,?,?,?)"
+
+  connection.query( sql, [title, director, imageName, abstract], (err, results) => {
+      if(err) return res.status(500).json({
+          error: 'Database Errore Store'
+      })
+
+      res.status(201).json({
+          status: "success",
+          message: "Movie creato con successo",
+          id: results.insertId
+      }
+      )
+  })
+
+}
+
+
+
+
+export { index, show, destroy , storeReview, store};

@@ -1,8 +1,9 @@
 import express from 'express';
+import upload from '../middlewares/multer.js';
 
 const router = express.Router();
 
-import { index, show, destroy, storeReview } from '../controllers/movieController.js';
+import { index, show, destroy, storeReview, store } from '../controllers/movieController.js';
 
 //Rotte
 
@@ -21,5 +22,12 @@ router.delete('/:id', destroy);
 //storeReview
 //localhost:3000/movies/:id/reviews
 router.post('/:id/reviews', storeReview);
+
+//store
+//creazione di un nuovo film
+//localhost:3000/movies con metodo POST
+
+router.post( '/', upload.single('image'), store ) 
+
 
 export default router;
